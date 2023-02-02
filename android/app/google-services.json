@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "511713853443",
+    "project_id": "astronerds",
+    "storage_bucket": "astronerds.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511713853443:android:62211e970d3ecaa1948e36",
+        "android_client_info": {
+          "package_name": "com.ashafio.astronerds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511713853443-gtslusathp9nhirk56kijo1qb04vtdkl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ashafio.astronerds",
+            "certificate_hash": "2988764d54706408535b398c3041a65bc6de857b"
+          }
+        },
+        {
+          "client_id": "511713853443-aklaa3g5pcjla951qkf5trfrhnggjl84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD37rLLfAs4Gw4PBj43yveCKsGQ2aBbT4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511713853443-aklaa3g5pcjla951qkf5trfrhnggjl84.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
