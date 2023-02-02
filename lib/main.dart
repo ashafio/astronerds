@@ -1,3 +1,4 @@
+import 'package:astronerds/ar_screens/earth.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:astronerds/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
