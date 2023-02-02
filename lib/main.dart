@@ -1,7 +1,9 @@
-import 'package:astronerds/inside_screen/explore_ar.dart';
-import 'package:flutter/material.dart';
+import 'package:astronerds/screens/home.dart';
 import 'package:astronerds/screens/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
 
 Future<void> main() async {
@@ -13,10 +15,34 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  var isLogin = false;
+  var auth = FirebaseAuth.instance;
+  checkIfLogin() async{
+    auth.authStateChanges().listen((User? user) {
+      if(user!=null && mounted){
+        setState(() {
+          isLogin = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    checkIfLogin();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,9 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
-      //home: const xplorear(),
-      //home: (),
+      home: isLogin ? homeScreen() : LoginScreen(),
     );
   }
 }

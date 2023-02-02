@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -110,8 +111,19 @@ class _LoginScreenState extends State<LoginScreen> {
       borderRadius: BorderRadius.circular(30),
       color: Colors.black,
       child: MaterialButton(onPressed: () {
+          //loading animation
+        showDialog(
+            context: context,
+            builder: (context) {
+              return Center(child: CircularProgressIndicator(),);
+        },
+        );
+        
         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen())); //pushreplacement doesnot copy previous page icons
         signIn(emailController.text, passwordController.text);
+        
+        // pop the loading animation
+        Navigator.of(context).pop();
       },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 25),
         minWidth: MediaQuery.of(context).size.width,
@@ -173,6 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text("Don't have an account? "),
                         GestureDetector(
                           onTap: (){
+                            CircularProgressIndicator();
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
                           },
                           child: Text(" Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.blue),),
@@ -219,7 +232,15 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } else {
-        print('Document does not exist on the database');
+        //print('Document does not exist on the database');
+        Fluttertoast.showToast(msg: "Document does not exist on the database");
+        /*
+        Alert(
+            context: context,
+            title: "Failed Login",
+            desc: "Incorrect Email Or Password.")
+            .show();
+        */
       }
     });
   }
@@ -240,9 +261,11 @@ class _LoginScreenState extends State<LoginScreen> {
         route();
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
-          print('No user found for that email.');
+          //print('No user found for that email.');
+          Fluttertoast.showToast(msg: 'No user found for that email.');
         } else if (e.code == 'wrong-password') {
-          print('Wrong password provided for that user.');
+          //print('Wrong password provided for that user.');
+          Fluttertoast.showToast(msg: 'Wrong password provided for that user.');
         }
       }
     }
