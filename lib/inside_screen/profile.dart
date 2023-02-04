@@ -35,7 +35,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Welcome"),
+        backgroundColor: Colors.black,
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.white,),
+        ),
+        title: Text("Hello AstroNerd!", style: TextStyle(color: Colors.white),),
         //centerTitle: true,
       ),
       body: Center(

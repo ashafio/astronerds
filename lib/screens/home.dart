@@ -3,8 +3,10 @@ import 'package:astronerds/inside_screen/courses.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/inside_screen/explore_ar.dart';
 import 'package:astronerds/inside_screen/photo_of_the_day.dart';
+import 'package:astronerds/screens/clippath.dart';
 import 'package:astronerds/screens/login.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +25,17 @@ class _homeScreenState extends State<homeScreen> {
     double h = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        /*leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.arrow_back,color: Colors.white,),
+        ),*/
+        title: Center(child: Text("AstroNerds", style: TextStyle(color: Colors.white),)),
+        //centerTitle: true,
+      ),
       resizeToAvoidBottomInset: false,
       body: Container(
         //children: [
@@ -42,7 +55,7 @@ class _homeScreenState extends State<homeScreen> {
       ),
 */
           child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(15.0),
       child: GridView(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20),
         children: [
@@ -55,10 +68,10 @@ class _homeScreenState extends State<homeScreen> {
                 children: [
                   //Icon(Icons.home,size: 50,color: Colors.white),
                   SizedBox(
-                    height: 120,
+                    height: h*0.1,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/post.json'),
                     ),
                   ),
@@ -78,10 +91,10 @@ class _homeScreenState extends State<homeScreen> {
                 children: [
                   //Icon(Icons.account_circle_rounded,size: 50,color: Colors.white),
                   SizedBox(
-                    height: 120,
+                    height: h*0.1,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/profile.json'),
                     ),
                   ),
@@ -89,7 +102,11 @@ class _homeScreenState extends State<homeScreen> {
                 ],),
             ),
             onTap: (){
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+              //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen()));
             },
           ),
 
@@ -101,10 +118,10 @@ class _homeScreenState extends State<homeScreen> {
                 children: [
                   //Icon(Icons.,size: 50,color: Colors.white),
                   SizedBox(
-                    height: 130,
+                    height: h*0.1,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/telescope.json'),
                     ),
                   ),
@@ -129,10 +146,10 @@ class _homeScreenState extends State<homeScreen> {
                   //Icon(Icons.home,size: 50,color: Colors.white),
                   //Lottie.asset('assets/elearn.json'),
                   SizedBox(
-                    height: 120,
+                    height: h*0.12,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/elearn.json'),
                     ),
                   ),
@@ -140,8 +157,9 @@ class _homeScreenState extends State<homeScreen> {
                 ],),
             ),
             onTap: (){
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-              //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => courseScreen()));
+              //Navigator.push(context, MaterialPageRoute(builder: (context)=>clippathScreen()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ClipAppScreen()));
+              //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: context)) => ClipAppScreen();
             },
           ),
 
@@ -154,14 +172,15 @@ class _homeScreenState extends State<homeScreen> {
                   //Icon(Icons.home,size: 50,color: Colors.white),
                   //Lottie.asset('assets/elearn.json'),
                   SizedBox(
-                    height: 120,
+                    height: h*0.1,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/photojson.json'),
                     ),
                   ),
-                  Text("Photo of the day",style: TextStyle(color: Colors.black,fontSize: 20,),),
+
+                    Text("Photo of the day",style: TextStyle(color: Colors.black,fontSize: 20,),),
                 ],),
             ),
             onTap: (){
@@ -178,10 +197,10 @@ class _homeScreenState extends State<homeScreen> {
                   //Icon(Icons.home,size: 50,color: Colors.white),
                   //Lottie.asset('assets/elearn.json'),
                   SizedBox(
-                    height: 130,
+                    height: h*0.15,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/askqna.json'),
                     ),
                   ),
@@ -202,10 +221,10 @@ class _homeScreenState extends State<homeScreen> {
                   //Icon(Icons.home,size: 50,color: Colors.white),
                   //Lottie.asset('assets/elearn.json'),
                   SizedBox(
-                    height: 120,
+                    height: h*0.15,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/blogs.json'),
                     ),
                   ),
@@ -226,10 +245,10 @@ class _homeScreenState extends State<homeScreen> {
                   //Icon(Icons.home,size: 50,color: Colors.white),
                   //Lottie.asset('assets/elearn.json'),
                   SizedBox(
-                    height: 120,
+                    height: h*0.1,
                     child: OverflowBox(
-                      minHeight: 170,
-                      maxHeight: 170,
+                      minHeight: h*0.33,
+                      maxHeight: h*0.33,
                       child: Lottie.asset('assets/events.json'),
                     ),
                   ),
@@ -252,6 +271,8 @@ class _homeScreenState extends State<homeScreen> {
       );
   }
 }
+
+
 
 class MyClipper extends CustomClipper<Path> {
 @override
@@ -297,3 +318,5 @@ class MyClipper extends CustomClipper<Path> {
 }
 }
 */
+
+
