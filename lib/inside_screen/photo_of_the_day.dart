@@ -36,7 +36,7 @@ class _potdScreenState extends State<potdScreen> {
 
   final FirebaseStorage storage = FirebaseStorage.instanceFor(bucket: 'gs://astrofire-38a8c.appspot.com');
 
-  late Uint8List imageBytes;
+  Uint8List ?imageBytes;
   late String errorMsg;
 
   _potdScreenState() {
@@ -54,7 +54,7 @@ class _potdScreenState extends State<potdScreen> {
   @override
   Widget build(BuildContext context) {
     var img = imageBytes != null ? Image.memory(
-      imageBytes,
+      imageBytes!,
       fit: BoxFit.cover,
     ) : Text(errorMsg != null ? errorMsg : "Loading...");
 

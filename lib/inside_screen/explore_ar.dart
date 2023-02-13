@@ -1,4 +1,5 @@
 import 'package:astronerds/ar_screens/earth.dart';
+import 'package:astronerds/ar_screens/uranus.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -75,6 +76,8 @@ class xplorear extends StatelessWidget {
     TextButton(
     child: Text('Uranus'),
     onPressed: () {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => uranus_ar()));
     },),
     TextButton(
     child: Text('Neptune'),

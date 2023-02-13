@@ -1,9 +1,10 @@
 import 'package:astronerds/model/user_model.dart';
+import 'package:astronerds/screens/admin_dashboard.dart';
 import 'package:astronerds/screens/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -17,13 +18,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     FirebaseFirestore.instance.collection("users").doc(user!.uid).get().then((value){
-      this.loggedInUser = UserModel.fromMap(value.data());
+      loggedInUser = UserModel.fromMap(value.data());
       setState(() {
 
       });
@@ -34,49 +36,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: GestureDetector(
           onTap: (){
             Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back,color: Colors.white,),
+          child: const Icon(Icons.arrow_back,color: Colors.white,),
         ),
-        title: Text("Hello AstroNerd!", style: TextStyle(color: Colors.white),),
+        title: const Text("Hello AstroNerd!", style: TextStyle(color: Colors.white),),
         //centerTitle: true,
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget> [
-              SizedBox(
+              const SizedBox(
                 height: 350,
-                child: Image.asset("assets/logo.png",fit: BoxFit.contain),
+                child: CircleAvatar(
+                  radius: 30.0,
+                ),
+                //child: Image.asset("assets/logo.png",fit: BoxFit.contain),
 
               ),
-              Text("Welcome Back!!!", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-              SizedBox(
+              const Text("Welcome Back!!!", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              const SizedBox(
                 height: 10,
               ),
               Text("${loggedInUser.firstname} ${loggedInUser.lastname}",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color:Colors.black54,
                       fontWeight: FontWeight.w500
                   )),
               Text("${loggedInUser.email}",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color:Colors.black54,
                       fontWeight: FontWeight.w500
                   )),
 
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
 
-              ActionChip(label: Text("Logout"),onPressed: (){
+              ActionChip(label: const Text("Logout"),onPressed: (){
                 logout(context);
-              })
+              }),
+              //Visibility(child: Text("Admin Panel"),)
+
+
+              TextButton(
+                child: const Text('User Info'),
+                onPressed: () {
+                  isAdmin();
+                },
+              ),
+
 
             ],
           ),
@@ -85,10 +101,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+
   Future<void> logout(BuildContext context) async
   {
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+    //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginScreen()));
+    //Navigator.pop(context);
+    Navigator.of(context).pushAndRemoveUntil(
+        new MaterialPageRoute(
+            builder: (context) =>
+            new LoginScreen()),
+            (route) => false);
   }
 
-}
+  //late bool _showButton;
+  isAdmin() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        if (documentSnapshot.get('role') == "admin") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const adminScreen()),);
+          /*
+          return TextButton(
+              child: const Text('See Admin Dashboard'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const adminScreen()),);
+              }
+          );
+           */
+          return Fluttertoast.showToast(msg: "Logged in as ${loggedInUser.firstname} ${loggedInUser.lastname}. Redirecting to Admin Dashboard");
+
+        } else {
+          return Fluttertoast.showToast(msg: "Logged in as ${loggedInUser.firstname} ${loggedInUser.lastname}.");
+        }
+      } else {
+        return Fluttertoast.showToast(msg: "Something went wrong");
+      }
+    });
+  }
+        /*
+        Alert(
+            context: context,
+            title: "Failed Login",
+            desc: "Incorrect Email Or Password.")
+            .show();
+        */
+        }
+
+  /*
+  buttonVisibility()
+  {
+    return Visibility(
+      maintainSize: true,
+      maintainAnimation: true,
+      maintainState: true,
+      visible: _showButton,
+      child: const Text("AdminPanel",style: TextStyle(color: Colors.red),),
+    );
+  }
+  */
+
