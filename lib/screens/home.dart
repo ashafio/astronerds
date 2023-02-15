@@ -1,4 +1,5 @@
 
+import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/inside_screen/courses.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/inside_screen/explore_ar.dart';
@@ -208,6 +209,7 @@ class _homeScreenState extends State<homeScreen> {
                 ],),
             ),
             onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> AskaQuestionScreen()));
               //Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
             },
           ),

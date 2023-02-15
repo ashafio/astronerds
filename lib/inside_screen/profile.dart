@@ -1,10 +1,15 @@
+import 'dart:io';
+
+import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/model/user_model.dart';
 import 'package:astronerds/screens/admin_dashboard.dart';
+import 'package:astronerds/screens/home.dart';
 import 'package:astronerds/screens/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -17,7 +22,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-
+  XFile? imgFile;
+  final ImagePicker imagePicker = ImagePicker();
+  late File displayIMG;
 
   @override
   void initState() {
@@ -33,21 +40,87 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
 
+  GetImageFromGallery() async
+  {
+    var imgFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      imgFile;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
+
+
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        leading: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
-          child: const Icon(Icons.arrow_back,color: Colors.white,),
-        ),
-        title: const Text("Hello AstroNerd!", style: TextStyle(color: Colors.white),),
-        //centerTitle: true,
+        toolbarHeight: 100.0,
+        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: () {
+          //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => homeScreen()));
+          Navigator.pop(context);
+        },),
+        //title: Text(null),
+        backgroundColor: Colors.black, // appbar color.
+        foregroundColor: Colors.white, // appbar text color.
+
+
+        actions: [
+
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(Icons.home,color: Colors.white,size: 35,),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen()));
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(Icons.notifications_active,color: Colors.white,size: 35,),
+              onPressed: () {
+                //                Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen()));
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(Icons.add_circle_rounded,color: Colors.white,size: 35,),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AskaQuestionScreen()));
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(Icons.search_rounded,color: Colors.white,size: 35,),
+              onPressed: () {
+                //                Navigator.push(context, MaterialPageRoute(builder: (context) => AskaQuestionScreen()));
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 50),
+            child: IconButton(
+              icon: Icon(Icons.person_2_rounded,color: Colors.white,size: 35,),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+
+              },
+            ),
+          ),
+          // add more IconButton
+        ],
       ),
+
+
+
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -55,15 +128,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget> [
-              const SizedBox(
-                height: 350,
-                child: CircleAvatar(
-                  radius: 30.0,
-                ),
-                //child: Image.asset("assets/logo.png",fit: BoxFit.contain),
 
+              GestureDetector(
+                onTap: ()
+                {
+                  GetImageFromGallery();
+                },
+                child: CircleAvatar(
+                  radius: MediaQuery.of(context).size.width*0.2,
+                  backgroundColor: Colors.black,
+                  backgroundImage: imgFile == null ? null : FileImage(
+                      displayIMG = File(imgFile!.path),
+                  ),
+                  child: imgFile == null ? Icon(
+                    Icons.add_photo_alternate_outlined,
+                    color: Colors.white,
+                    size: MediaQuery.of(context).size.width*0.1,
+                  ): null ,
+                ),
               ),
-              const Text("Welcome Back!!!", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+
+
+
+
+              //const Text("Welcome Back!!!", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
               const SizedBox(
                 height: 10,
               ),

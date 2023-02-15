@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:astronerds/model/potd_models.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:astronerds/screens/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart';
 
 var now = new DateTime.now();
 var formatter = new DateFormat('yyyy-MM-dd');
@@ -23,6 +25,16 @@ class potdScreen extends StatefulWidget {
 
 class _potdScreenState extends State<potdScreen> {
 
+  /*
+  late Future <List<PotdModels>> potdmodels;
+  final String url = "https://apodapi.herokuapp.com/api/?count=5";
+
+  Future<List<PotModels>> fetchdata() async{
+    var response = await http.get(url);
+  }
+  if(response.s)
+   */
+
 /*
   firebase_storage.FirebaseStorage storage1 =
   firebase_storage.FirebaseStorage.instanceFor(
@@ -34,6 +46,7 @@ class _potdScreenState extends State<potdScreen> {
       storageBucket: 'gs://astrofire-38a8c.appspot.com');
 */
 
+  /*
   final FirebaseStorage storage = FirebaseStorage.instanceFor(bucket: 'gs://astrofire-38a8c.appspot.com');
 
   Uint8List ?imageBytes;
@@ -50,13 +63,16 @@ class _potdScreenState extends State<potdScreen> {
         })
     );
   }
+   */
 
   @override
   Widget build(BuildContext context) {
+    /*
     var img = imageBytes != null ? Image.memory(
       imageBytes!,
       fit: BoxFit.cover,
     ) : Text(errorMsg != null ? errorMsg : "Loading...");
+     */
 
     return Scaffold(
         appBar: AppBar(
@@ -94,6 +110,7 @@ class _potdScreenState extends State<potdScreen> {
 
 
 
+        /*
         body: new ListView(
           children: <Widget>[
             Center(child:
@@ -108,7 +125,9 @@ class _potdScreenState extends State<potdScreen> {
             ),
             img,
           ],
-        ));
+        )
+         */
+    );
   }
 }
 
