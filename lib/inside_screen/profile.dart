@@ -50,6 +50,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +123,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
 
 
-
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -138,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   radius: MediaQuery.of(context).size.width*0.2,
                   backgroundColor: Colors.black,
                   backgroundImage: imgFile == null ? null : FileImage(
-                      displayIMG = File(imgFile!.path),
+                    displayIMG = File(imgFile!.path),
                   ),
                   child: imgFile == null ? Icon(
                     Icons.add_photo_alternate_outlined,
@@ -153,13 +155,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               //const Text("Welcome Back!!!", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
               const SizedBox(
-                height: 10,
+                height: 30,
               ),
               Text("${loggedInUser.firstname} ${loggedInUser.lastname}",
                   style: const TextStyle(
-                      color:Colors.black54,
+                      fontSize: 30,
+                      color:Colors.black,
                       fontWeight: FontWeight.w500
                   )),
+              const SizedBox(height: 10,),
               Text("${loggedInUser.email}",
                   style: const TextStyle(
                       color:Colors.black54,
@@ -168,7 +172,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               const SizedBox(height: 15,),
 
-              ActionChip(label: const Text("Logout"),onPressed: (){
+              Text("${loggedInUser.bio}",
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color:Colors.black,
+                      fontWeight: FontWeight.w500
+                  )),
+
+              const SizedBox(height: 15,),
+
+              ActionChip(label: const Text("Logout"),
+                  onPressed: (){
                 logout(context);
               }),
               //Visibility(child: Text("Admin Panel"),)
@@ -186,7 +200,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
+
     );
+
   }
 
 

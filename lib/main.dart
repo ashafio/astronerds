@@ -4,12 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  dotenv.load(fileName: ".env");
   await Firebase.initializeApp();
-
+//  await dotenv.load(fileName: ".env"); //chatgpt -> cg
 
 
   runApp(const MyApp());
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
       title: 'ASTRONERDS',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
       home: isLogin ? homeScreen() : LoginScreen(),
     );

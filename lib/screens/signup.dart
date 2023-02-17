@@ -125,7 +125,8 @@ class _SignupScreenState extends State<SignupScreen> {
         //regex expression for email validation
         if(!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value))
         {
-          return ("Please Enter a Valid Email.");
+          Fluttertoast.showToast(msg: "Please Enter a Valid Email.");
+          //return ("Please Enter a Valid Email.");
         }
         return null;
       },
@@ -219,6 +220,14 @@ class _SignupScreenState extends State<SignupScreen> {
         child: MaterialButton(onPressed: () {
           // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen())); //pushreplacement doesnot copy previous page icons
           signUp(emailEditingController.text, passwordEditingController.text);
+
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: Center(
+              child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
+            ),
+          );
 
         },
 

@@ -1,9 +1,9 @@
+import 'package:astronerds/chatgpt/chat_screen.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:astronerds/inside_screen/chatgpt.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 
 
@@ -201,7 +201,7 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
                           const Text("Want instant answers? "),
                           GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> chatGPT()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ChatScreen()));
                             },
                             child: Text("Ask ChatGPT",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.blue),),
                           )

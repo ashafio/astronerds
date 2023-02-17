@@ -34,6 +34,11 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  chat_gpt_sdk:
+    git:
+      url: https://github.com/iampawan/Flutter-ChatGPT.git
+
+  flutter_dotenv: ^5.0.2
   cupertino_icons: ^1.0.2
   cloud_firestore: ^4.3.1
   fluttertoast: ^8.1.2
@@ -54,6 +59,7 @@ dependencies:
   image_ink_well: ^0.1.0
   flutter_glow: ^0.2.0
   image_picker: ^0.8.6+1
+  velocity_x: ^3.6.0
 
 
 dev_dependencies:
