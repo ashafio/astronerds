@@ -1,6 +1,8 @@
 
 import 'package:astronerds/inside_screen/ask_a_question.dart';
+import 'package:astronerds/inside_screen/blogs.dart';
 import 'package:astronerds/inside_screen/courses.dart';
+import 'package:astronerds/inside_screen/nasa_apod.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/inside_screen/explore_ar.dart';
 import 'package:astronerds/inside_screen/photo_of_the_day.dart';
@@ -185,7 +187,8 @@ class _homeScreenState extends State<homeScreen> {
                 ],),
             ),
             onTap: (){
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>potdScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> NasaAPOD()));
+              //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>potdScreen()));
             },
           ),
 
@@ -234,7 +237,7 @@ class _homeScreenState extends State<homeScreen> {
                 ],),
             ),
             onTap: (){
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>blogScreen()));
             },
           ),
 

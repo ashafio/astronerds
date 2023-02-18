@@ -60,6 +60,7 @@ dependencies:
   flutter_glow: ^0.2.0
   image_picker: ^0.8.6+1
   velocity_x: ^3.6.0
+  webview_flutter: ^2.8.0
 
 
 dev_dependencies:

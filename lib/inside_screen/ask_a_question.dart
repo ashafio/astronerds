@@ -1,10 +1,16 @@
 import 'package:astronerds/chatgpt/chat_screen.dart';
 import 'package:astronerds/inside_screen/profile.dart';
+import 'package:astronerds/model/post_model.dart';
+import 'package:astronerds/model/user_model.dart';
 import 'package:astronerds/screens/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class AskaQuestionScreen extends StatefulWidget {
@@ -24,7 +30,10 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
   @override
   Widget build(BuildContext context) {
 
-      final askField =  TextField(
+    //final PostModel postData = InheritedModelElement(PostModel as InheritedModel) as PostModel;
+
+
+    final askField =  TextField(
         autofocus: false,
         controller: TextPostController,
         keyboardType: TextInputType.multiline,
@@ -186,7 +195,9 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
                           ),
                         ),
                         onPressed: () {
+
                           // add userPost here ...............................................
+
                         },
                         child: const Text('Post',style: TextStyle(fontSize: 20),),
                       ),
@@ -219,4 +230,6 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
         ),
     );
   }
+
+
 }

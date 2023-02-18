@@ -1,3 +1,4 @@
+import 'package:astronerds/admin_controls/publish_a_blog.dart';
 import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/screens/home.dart';
@@ -93,17 +94,18 @@ class _adminScreenState extends State<adminScreen> {
             ),
             Container(
               height: 70,
-              width: 250,
+              width: 200,
 
               margin: EdgeInsets.all(25),
-              child: TextButton(
+              child: TextButton.icon(
                 onPressed: () {
                   //print('I got clicked');
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> publishBlog()));
                 },
-                child: Text('Publish a Blog'),
+                //Text('Publish a Blog'),
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.white, textStyle: TextStyle(fontSize: 20.0),
-                    backgroundColor: Colors.teal),
+                    backgroundColor: Colors.teal), icon: Icon(Icons.add_circle_rounded), label: Text("Publish a blog"),
               ),
             ),
 
