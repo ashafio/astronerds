@@ -41,22 +41,6 @@ class _homeScreenState extends State<homeScreen> {
       ),
       resizeToAvoidBottomInset: false,
       body: Container(
-        //children: [
-/*
-          Container(
-            width: w,
-            height: 100,
-            child:         ClipPath(
-              clipper: MyClipper(),
-              child: Container(
-                width: double.infinity,
-                height: 100,
-                color: Colors.black,
-
-              ),
-            ),
-      ),
-*/
           child: Padding(
           padding: const EdgeInsets.all(15.0),
       child: GridView(
@@ -161,7 +145,7 @@ class _homeScreenState extends State<homeScreen> {
             ),
             onTap: (){
               //Navigator.push(context, MaterialPageRoute(builder: (context)=>clippathScreen()));
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ClipAppScreen()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => courseScreen()));
               //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: context)) => ClipAppScreen();
             },
           ),

@@ -33,7 +33,7 @@ class _blogScreenState extends State<blogScreen> {
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.grey,
-                      fontStyle: FontStyle.italic,
+                      fontStyle: FontStyle.normal,
 
                     ),
                   ),
@@ -44,7 +44,7 @@ class _blogScreenState extends State<blogScreen> {
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.grey,
-                      fontStyle: FontStyle.italic,
+                      fontStyle: FontStyle.normal,
 
                     ),
                   ),
@@ -63,9 +63,9 @@ class _blogScreenState extends State<blogScreen> {
                 blogModel.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 17.0,
                   color: Colors.black,
-                  fontStyle: FontStyle.italic,
+                  fontStyle: FontStyle.normal,
               ),
               ),
             ],

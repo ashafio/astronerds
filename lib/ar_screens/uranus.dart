@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:babylonjs_viewer/babylonjs_viewer.dart';
 
 
-class uranus_ar extends StatefulWidget {
-  const uranus_ar({Key? key}) : super(key: key);
+class uranus extends StatefulWidget {
+  const uranus({Key? key}) : super(key: key);
 
   @override
-  State<uranus_ar> createState() => _uranus_arState();
+  State<uranus> createState() => _uranusState();
 }
 
-class _uranus_arState extends State<uranus_ar> {
+class _uranusState extends State<uranus> {
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _uranus_arState extends State<uranus_ar> {
           ],
         ),
         body: BabylonJSViewer(
-          src: 'https://drive.google.com/file/d/1tsbXRGyXc929xV7XelbaTJx8gapgy2M9/view?usp=share_link',
+          src: 'assets/glbs/uranus.glb',
         ),
       ),
     );

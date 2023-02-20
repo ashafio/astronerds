@@ -50,7 +50,7 @@ class _earth_arState extends State<earth_ar> {
           ],
         ),
         body: BabylonJSViewer(
-          src: 'assets/earth.glb',
+          src: 'assets/glbs/earth.glb',
         ),
       ),
     );

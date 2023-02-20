@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class publishBlog extends StatefulWidget {
   const publishBlog({Key? key}) : super(key: key);
@@ -49,27 +50,78 @@ class _publishBlogState extends State<publishBlog> {
       setState(() {
         loading = true;
       });
-      uploadImg();
+      saveData();
+      //uploadImg();
     }
 
   }
 
+  Future<String> uploadImg() async {
+// Create a unique file name for image
+    String imageFileName = DateTime.now().microsecondsSinceEpoch.toString();
 
-  void uploadImg(){
+    Reference storageReference =
+    FirebaseStorage.instance.ref().child('blogphoto').child(imageFileName);
+
+    UploadTask uploadTask = storageReference.putFile(imageFile!);
+
+    TaskSnapshot snap = await uploadTask;
+    String downloadUrl = await snap.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  void saveData() async {
+    String imageUrl = await uploadImg();
+    var dateFormat = DateFormat('MMM d, yyyy');
+    var timeFormat = DateFormat('EEEE, hh:mm a');
+
+    String date = dateFormat.format(DateTime.now().toString() as DateTime);
+    String time = timeFormat.format(DateTime.now().toString() as DateTime);
+    String uid = Uuid().v1();
+    var dataMap = {
+      'imageUrl': imageUrl,
+      'description': descriptionEditingController.text,
+      'date': date,
+      'time': time,
+    };
+    await FirebaseFirestore.instance
+        .collection('blogs')
+        .doc(uid)
+        .set(dataMap).whenComplete(() {
+      setState(() {
+        loading = true;
+      });
+      Fluttertoast.showToast(msg: 'Blog Uploaded Successfully');
+      Navigator.pop(context);
+    }).catchError((error) {
+      setState(() {
+        loading = false;
+      });
+      Fluttertoast.showToast(msg: error.toString());
+    });
+  }
+
+/*
+  String uploadImg(){
 // Create a unique file name for image
   String imageFileName = DateTime.now().microsecondsSinceEpoch.toString();
   final Reference storageReference = FirebaseStorage.instance.ref()
   .child('blogphoto').child(imageFileName);
-  
+
+  String downloadUrl = '';
   final UploadTask uploadTask = storageReference.putFile(imageFile!);
   
-  uploadTask.then((TaskSnapshot tasksnapshot){
-  
-    tasksnapshot.ref.getDownloadURL().then((imageUrl){
-      //save into firestore
-      saveData(imageUrl);
+  uploadTask.then((TaskSnapshot tasksnapshot) async {
 
+      downloadUrl = await tasksnapshot.ref.getDownloadURL();
+    //{
+
+    //tasksnapshot.ref.getDownloadURL().then((imageUrl){
+    //save into firestore
+    //saveData(imageUrl);
+/*
     });
+
     
   }).catchError((error){
     setState(() {
@@ -78,17 +130,28 @@ class _publishBlogState extends State<publishBlog> {
     Fluttertoast.showToast(msg: error.toString());
   });
   }
+*/
+
+  });
+  return downloadUrl;
+  }
+*/
+
+/*
+  Future<void> saveData() async {
 
 
-  void saveData(String imageUrl){
-
+    String imageUrl = await uploadImg();
     var dateFormat = DateFormat('MMM d, yyyy');
     var timeFormat = DateFormat('EEEE, hh:mm a');
 
     String date = dateFormat.format(DateTime.now().toString() as DateTime);
     String time = timeFormat.format(DateTime.now().toString() as DateTime);
 
-    FirebaseFirestore.instance.collection('blogs').add({
+    print("imageUrl: "+imageUrl);
+
+    String uid = Uuid().v1();
+    FirebaseFirestore.instance.collection('blogs').doc(uid).set({
       'imageUrl' : imageUrl,
       'description' : descriptionEditingController.text,
       'date': date,
@@ -108,7 +171,7 @@ class _publishBlogState extends State<publishBlog> {
     });
 
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

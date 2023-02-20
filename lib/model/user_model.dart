@@ -5,8 +5,10 @@ class UserModel {
   String? lastname;
   String? role;
   String? bio;
+  String? study;
+  String? dpurl;
 
-  UserModel({this.uid,this.email,this.firstname,this.lastname, this.role, this.bio});
+  UserModel({this.uid,this.email,this.firstname,this.lastname, this.role, this.bio, this.study, this.dpurl});
 
   //receive data from server
 factory UserModel.fromMap(map){
@@ -16,7 +18,9 @@ factory UserModel.fromMap(map){
     firstname: map['firstname'],
     lastname: map['lastname'],
     role: map['user'],
-    bio: map['bio']
+    bio: map['bio'],
+    study: map['study'],
+    dpurl: map['dpurl']
   );
 }
 
@@ -30,6 +34,8 @@ Map<String, dynamic> toMap(){
     'lastname': lastname,
     'role': role,
     'bio': bio,
+    'study': study,
+    'dpurl': dpurl
   };
 
 

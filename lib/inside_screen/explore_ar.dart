@@ -1,4 +1,5 @@
 import 'package:astronerds/ar_screens/earth.dart';
+import 'package:astronerds/ar_screens/universe.dart';
 import 'package:astronerds/ar_screens/uranus.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -41,60 +42,164 @@ class xplorear extends StatelessWidget {
             // add more IconButton
           ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                child: Text('Mercury'),
+        body: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20),
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Mercury'),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Venus'),
+                  ),
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> earth_ar()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Earth'),
+                  ),
+
+
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Mars'),
+                  ),
+
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Jupitar'),
+                  ),
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Saturn'),
+                  ),
+
+
+
+              ElevatedButton(
                 onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                  shadowColor: Colors.grey, // elevation color
+                  elevation: 5, // elevation of button
+                ),
+                child: const Text('Uranus'),
               ),
 
-              TextButton(
-                child: Text('Venus'),
-                onPressed: () {
-                },
-              ),
-          TextButton(
-            child: Text('Earth'),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => earth_ar()));
-            },),
-    TextButton(
-    child: Text('Mars'),
-    onPressed: () {
-    },),
-    TextButton(
-    child: Text('Jupiter'),
-    onPressed: () {
-    },),
-    TextButton(
-    child: Text('Saturn'),
-    onPressed: () {
-    },),
-    TextButton(
-    child: Text('Uranus'),
-    onPressed: () {
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => uranus_ar()));
-    },),
-    TextButton(
-    child: Text('Neptune'),
-    onPressed: () {
-    },),
-    TextButton(
-    child: Text('Pluto'),
-    onPressed: () {
-    },),
-    TextButton(
-    child: Text('Sun'),
-    onPressed: () {
-    },
-    ), ],
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Neptune'),
+                  ),
+
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Pluto'),
+                  ),
+
+
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> uranus()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Sun'),
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> universe()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.red, // foreground color
+                      shadowColor: Colors.grey, // elevation color
+                      elevation: 5, // elevation of button
+                    ),
+                    child: const Text('Universe'),
+                  ),
+
+
+                ],
           ),
         ),
       ),
-    );
+    ),);
   }
 }

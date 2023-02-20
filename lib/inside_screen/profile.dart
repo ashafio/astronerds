@@ -111,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 50),
             child: IconButton(
-              icon: Icon(Icons.person_2_rounded,color: Colors.white,size: 35,),
+              icon: Icon(Icons.mode_edit_outline,color: Colors.white,size: 30,),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
 
@@ -127,8 +127,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget> [
 
               GestureDetector(
@@ -181,10 +181,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               const SizedBox(height: 15,),
 
+
+              Text("Studies at ${loggedInUser.study}",
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color:Colors.black,
+                      fontWeight: FontWeight.w500
+                  )),
+
+              const SizedBox(height: 15,),
+
+              /*
+              TextButton.icon(onPressed: (){
+                logout(context);
+              },
+                  style: TextButton.styleFrom(
+                    side: BorderSide(
+                      color: Colors.red, width: 3,style: BorderStyle.solid,strokeAlign: BorderSide.strokeAlignInside
+                    )
+                  ),
+                  icon: Icon(Icons.logout),
+                  label: Text("sign out")),
+
+              /*
               ActionChip(label: const Text("Logout"),
                   onPressed: (){
                 logout(context);
               }),
+               */
               //Visibility(child: Text("Admin Panel"),)
 
 
@@ -194,6 +218,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   isAdmin();
                 },
               ),
+               */
+                 Container(
+                   alignment: Alignment.centerRight,
+                   child: Row(
+                    children: [
+                         TextButton.icon(onPressed: (){
+                          logout(context);
+                        },
+                            style: TextButton.styleFrom(
+                                side: BorderSide(
+                                    color: Colors.red, width: 3,style: BorderStyle.solid,strokeAlign: BorderSide.strokeAlignInside
+                                )
+                            ),
+                            icon: Icon(Icons.logout),
+                            label: Text("sign out")),
+
+
+                         TextButton(
+                          child: const Text('User Info'),
+                          onPressed: () {
+                            isAdmin();
+                          },
+                        ),
+                    ],
+                ),
+                 ),
+
+
+
 
 
             ],

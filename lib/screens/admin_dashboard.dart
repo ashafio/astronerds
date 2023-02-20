@@ -1,3 +1,4 @@
+import 'package:astronerds/admin_controls/add_new_course.dart';
 import 'package:astronerds/admin_controls/publish_a_blog.dart';
 import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/inside_screen/profile.dart';
@@ -90,8 +91,10 @@ class _adminScreenState extends State<adminScreen> {
           body: Center(child: Column(children: <Widget>[
             SizedBox(height: 40,),
             Container(
-              child: Text("Admin DashBoard",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
+              child: Text("Admin DashBoard",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30, fontFamily: "Typewriter"),),
             ),
+
+
             Container(
               height: 70,
               width: 200,
@@ -109,49 +112,39 @@ class _adminScreenState extends State<adminScreen> {
               ),
             ),
 
-            Container(
-              height: 70,
-              width: 250,
-              margin: EdgeInsets.all(25),
-              child: TextButton(
-                onPressed: () {
-                  //print('I got clicked');
-                },
-                child: Text('Add Photo of the day'),
-                style: TextButton.styleFrom(
-                    foregroundColor: Colors.white, textStyle: TextStyle(fontSize: 20.0),
-                    backgroundColor: Colors.teal),
-              ),
-            ),
+
 
             Container(
               height: 70,
-              width: 250,
+              width: 200,
+
               margin: EdgeInsets.all(25),
-              child: TextButton(
+              child: TextButton.icon(
                 onPressed: () {
-                  //print('I got clicked');
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> publishBlog()));
                 },
-                child: Text('Add Upcoming Events'),
+                //Text('Publish a Blog'),
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.white, textStyle: TextStyle(fontSize: 20.0),
-                    backgroundColor: Colors.teal),
+                    backgroundColor: Colors.teal), icon: Icon(Icons.add_circle_rounded), label: Text("Add Upcoming Events"),
               ),
             ),
 
 
             Container(
               height: 70,
-              width: 250,
+              width: 200,
+
               margin: EdgeInsets.all(25),
-              child: TextButton(
+              child: TextButton.icon(
                 onPressed: () {
-                  //print('I got clicked');
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=> uploadCourse()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> uploadCourse()));
                 },
-                child: Text('Upload a New Course'),
+                //Text('Publish a Blog'),
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.white, textStyle: TextStyle(fontSize: 20.0),
-                    backgroundColor: Colors.teal),
+                    backgroundColor: Colors.teal), icon: Icon(Icons.add_circle_rounded), label: Text("Add New Courses"),
               ),
             ),
 
