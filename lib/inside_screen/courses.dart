@@ -1,104 +1,67 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:astronerds/model/courses/firebase_api.dart';
-import 'package:astronerds/model/courses/course_model.dart';
+import 'dart:io';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:astronerds/model/courses/viewPage.dart';
+import 'package:video_player/video_player.dart';
 
 class courseScreen extends StatefulWidget {
+  // File? sub1;
+  // courseScreen({
+  //   required this.sub1,
+  // });
   @override
-  _courseScreenState createState() => _courseScreenState();
+  State<courseScreen> createState() => _courseScreenState();
 }
 
 class _courseScreenState extends State<courseScreen> {
-  late Future<List<FirebaseFile>> futureFiles;
+  // File? sub1;
+  // _courseScreenState({
+  //   required this.sub1,
+  // });
+  VideoPlayerController? _controller;
 
   @override
   void initState() {
     super.initState();
 
-    futureFiles = FirebaseApi.listAll('courses/');
+    // _controller = VideoPlayerController.file(sub1!)
+    //   ..initialize().then((_) {
+    //     setState(() {});
+    //   });
+
+    _controller = VideoPlayerController.network(
+      //'https://firebasestorage.googleapis.com/v0/b/astronerds.appspot.com/o/courses%2FVID-20230220-WA0001.mp4?alt=media&token=8606f8a1-cdf0-43ab-9420-739f6f00673c'
+      'https://firebasestorage.googleapis.com/v0/b/astronerds.appspot.com/o/courses%2FAstronomy.mp4?alt=media&token=d4bcbbe7-aec7-4f90-9f5c-d858290e3598'
+       // 'gs://astronerds.appspot.com/courses'
+
+    )..initialize().then((_) {
+        setState(() {});
+      });
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      //title: Text(MyApp.title),
-      centerTitle: true,
-    ),
-    body: FutureBuilder<List<FirebaseFile>>(
-      future: futureFiles,
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return Center(child: CircularProgressIndicator());
-          default:
-            if (snapshot.hasError) {
-              return Center(child: Text('Some error occurred!'));
-            } else {
-              final files = snapshot.data!;
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildHeader(files.length),
-                  const SizedBox(height: 12),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: files.length,
-                      itemBuilder: (context, index) {
-                        final file = files[index];
-
-                        return buildFile(context, file);
-                      },
-                    ),
-                  ),
-                ],
-              );
-            }
-        }
-      },
-    ),
-  );
-
-  Widget buildFile(BuildContext context, FirebaseFile file) => ListTile(
-    leading: ClipOval(
-      child: Image.network(
-        file.url,
-        width: 52,
-        height: 52,
-        fit: BoxFit.cover,
+  Widget build(BuildContext context) {
+    final chewieController = ChewieController(
+      videoPlayerController: _controller!,
+      autoPlay: false,
+      looping: false,
+    );
+    return Scaffold(
+      body: Center(
+        child: _controller!.value.isInitialized
+            ? AspectRatio(
+          aspectRatio: _controller!.value.aspectRatio,
+          child: Chewie(
+            controller: chewieController,
+          ),
+        )
+            : Container(),
       ),
-    ),
-    title: Text(
-      file.name,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        decoration: TextDecoration.underline,
-        color: Colors.blue,
-      ),
-    ),
-    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ImagePage(file: file),
-    )),
-  );
+    );
+  }
 
-  Widget buildHeader(int length) => ListTile(
-    tileColor: Colors.blue,
-    leading: Container(
-      width: 52,
-      height: 52,
-      child: Icon(
-        Icons.file_copy,
-        color: Colors.white,
-      ),
-    ),
-    title: Text(
-      '$length Files',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-        color: Colors.white,
-      ),
-    ),
-  );
+  @override
+  void dispose() {
+    super.dispose();
+    _controller!.dispose();
+  }
 }

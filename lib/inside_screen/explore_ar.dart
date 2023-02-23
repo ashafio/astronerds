@@ -44,7 +44,7 @@ class xplorear extends StatelessWidget {
         ),
         body: Container(
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(35.0),
             child: GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20),
                 children: [

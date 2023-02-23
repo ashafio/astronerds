@@ -1,7 +1,8 @@
 import 'package:astronerds/model/user_model.dart';
 class PostModel {
   //Reference? uid;
-  UserModel? user;
+  //UserModel? user;
+  String? uid;
   String? qsnid;
   String? qsndesc;
 
@@ -11,7 +12,7 @@ class PostModel {
 
   //PostModel({this.uid,this.qsndesc,this.qsnid,this.firstname,this.lastname,  this.comments});
 
-  PostModel({this.user,this.qsnid,this.qsndesc, required uid});
+  PostModel({this.uid,this.qsnid,this.qsndesc});
 
   //receive data from server
   factory PostModel.fromMap(map){
@@ -37,6 +38,7 @@ class PostModel {
 // send data to server
   Map<String, dynamic> toMap(){
     return{
+      'uid':uid,
       'qsnid': qsnid,
       'qsndesc': qsndesc,
     };

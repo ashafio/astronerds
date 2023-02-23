@@ -1,16 +1,18 @@
-import 'package:astronerds/chatgpt/chat_screen.dart';
+import 'package:astronerds/chatgpt/chatGPT_webview.dart';
+//import 'package:astronerds/chatgpt/chat_screen.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/model/post_model.dart';
 import 'package:astronerds/model/user_model.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:uuid/uuid.dart';
 
 
 class AskaQuestionScreen extends StatefulWidget {
@@ -21,6 +23,9 @@ class AskaQuestionScreen extends StatefulWidget {
 }
 
 class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
 
   final _auth = FirebaseAuth.instance;
   //form key
@@ -45,8 +50,8 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
       },
         textInputAction:TextInputAction.newline,
         decoration: InputDecoration(
-            prefixIcon: Icon(Icons.question_answer_rounded),
-            contentPadding: const EdgeInsets.fromLTRB(5, 50, 5, 50),
+            //prefixIcon: Icon(Icons.question_answer_rounded),
+            //contentPadding: const EdgeInsets.fromLTRB(5, 50, 5, 50),
             hintText: "Hey AstroNerd!!! Ask a Question.",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -161,7 +166,9 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
                       askField,
                       SizedBox(height: 20,),
 
+                      /*
                       ElevatedButton.icon(
+
                       style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black87, backgroundColor: Colors.grey[300],
                       minimumSize: Size(88, 36),
@@ -182,7 +189,8 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
                       ),
 
 
-                      SizedBox(height: 10,),
+                       */
+
 
 
                       ElevatedButton(
@@ -196,8 +204,12 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
                         ),
                         onPressed: () {
 
-                          // add userPost here ...............................................
-
+                          if(TextPostController.text.isEmpty){
+                            Fluttertoast.showToast(msg: '"Please write something"');
+                          }else {
+                            sendPost();
+                            // add userPost here ...............................................
+                          }
                         },
                         child: const Text('Post',style: TextStyle(fontSize: 20),),
                       ),
@@ -212,7 +224,7 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
                           const Text("Want instant answers? "),
                           GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> ChatScreen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> chatGPTweb()));
                             },
                             child: Text("Ask ChatGPT",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.blue),),
                           )
@@ -229,6 +241,33 @@ class _AskaQuestionScreenState extends State<AskaQuestionScreen> {
           ),
         ),
     );
+  }
+
+  sendPost() async {
+    // call firestore
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    String postdocid = Uuid().v1();
+
+
+    // call usermodel
+    //UserModel userModel = UserModel();
+
+    PostModel postModel = PostModel();
+
+    //send value
+    postModel.uid = user?.uid;
+    postModel.qsnid = postdocid;
+    postModel.qsndesc = TextPostController.text;
+
+
+    await firebaseFirestore.collection("questions").doc(postdocid).set(postModel.toMap());
+
+    //Navigator.pushAndRemoveUntil(context as BuildContext, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+    //Navigator.pushAndRemoveUntil(context as BuildContext, MaterialPageRoute(builder: (context) => emailVerify()), (route) => false);
+
+    Fluttertoast.showToast(msg: 'Post added successfully');
+
   }
 
 

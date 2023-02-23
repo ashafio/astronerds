@@ -1,6 +1,6 @@
 import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/inside_screen/profile.dart';
-import 'package:astronerds/model/blog_model.dart';
+import 'package:astronerds/model/blogView_model.dart';
 import 'package:astronerds/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +15,7 @@ class blogScreen extends StatefulWidget {
 
 class _blogScreenState extends State<blogScreen> {
 
-  Widget cardUI(BlogModel blogModel){
+  Widget cardUI(BlogViewModel blogViewModel){
     return Card(
       margin: EdgeInsets.all(16.0),
       elevation: 10.0,
@@ -28,7 +28,7 @@ class _blogScreenState extends State<blogScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    blogModel.date,
+                    blogViewModel.date,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16.0,
@@ -39,7 +39,7 @@ class _blogScreenState extends State<blogScreen> {
                   ),
 
                   Text(
-                    blogModel.time,
+                    blogViewModel.time,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16.0,
@@ -52,7 +52,7 @@ class _blogScreenState extends State<blogScreen> {
               ),
               SizedBox(height: 10.0,),
               Image.network(
-                blogModel.imageUrl,
+                blogViewModel.imageUrl,
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.cover,
@@ -60,7 +60,7 @@ class _blogScreenState extends State<blogScreen> {
               SizedBox(height: 10.0,),
 
               Text(
-                blogModel.description,
+                blogViewModel.description,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 17.0,
@@ -157,13 +157,13 @@ class _blogScreenState extends State<blogScreen> {
                 itemBuilder: (context,index){
                   Map<String, dynamic>? postMap =
                       snapshot.data?.docs[index].data();
-                  BlogModel blogModel = BlogModel(
+                  BlogViewModel blogViewModel = BlogViewModel(
                     postMap!['imageUrl'],
                     postMap['description'],
                     postMap['date'],
                     postMap['time'],
                   );
-                  return cardUI(blogModel);
+                  return cardUI(blogViewModel);
                 },
               );
             }

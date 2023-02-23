@@ -145,8 +145,8 @@ class _homeScreenState extends State<homeScreen> {
             ),
             onTap: (){
               //Navigator.push(context, MaterialPageRoute(builder: (context)=>clippathScreen()));
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => courseScreen()));
-              //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: context)) => ClipAppScreen();
+              //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => courseScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>courseScreen()));
             },
           ),
 
