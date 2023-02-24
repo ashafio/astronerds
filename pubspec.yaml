@@ -68,6 +68,7 @@ dependencies:
   chewie: ^1.4.0
   firebase_database: ^10.0.14
   better_player: ^0.0.83
+  syncfusion_flutter_pdfviewer: ^20.4.51
 
 
 

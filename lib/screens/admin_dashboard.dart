@@ -1,4 +1,5 @@
 import 'package:astronerds/admin_controls/add_new_course.dart';
+import 'package:astronerds/admin_controls/pdf_up.dart';
 import 'package:astronerds/admin_controls/publish_a_blog.dart';
 import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/inside_screen/profile.dart';
@@ -109,6 +110,24 @@ class _adminScreenState extends State<adminScreen> {
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.white, textStyle: TextStyle(fontSize: 20.0),
                     backgroundColor: Colors.teal), icon: Icon(Icons.add_circle_rounded), label: Text("Publish a blog"),
+              ),
+            ),
+
+
+            Container(
+              height: 70,
+              width: 200,
+
+              margin: EdgeInsets.all(25),
+              child: TextButton.icon(
+                onPressed: () {
+                  //print('I got clicked');
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> pdfup()));
+                },
+                //Text('Publish a Blog'),
+                style: TextButton.styleFrom(
+                    foregroundColor: Colors.white, textStyle: TextStyle(fontSize: 20.0),
+                    backgroundColor: Colors.teal), icon: Icon(Icons.add_circle_rounded), label: Text("Upload an eBook"),
               ),
             ),
 

@@ -2,6 +2,7 @@
 import 'package:astronerds/inside_screen/ask_a_question.dart';
 import 'package:astronerds/inside_screen/blogs.dart';
 import 'package:astronerds/inside_screen/courses.dart';
+import 'package:astronerds/inside_screen/ebooks.dart';
 import 'package:astronerds/inside_screen/nasa_apod.dart';
 import 'package:astronerds/inside_screen/profile.dart';
 import 'package:astronerds/inside_screen/explore_ar.dart';
@@ -241,10 +242,11 @@ class _homeScreenState extends State<homeScreen> {
                       child: Lottie.asset('assets/events.json'),
                     ),
                   ),
-                  Text("Recent Events",style: TextStyle(color: Colors.black,fontSize: 20,),),
+                  Text("Recent Events PDF",style: TextStyle(color: Colors.black,fontSize: 20,),),
                 ],),
             ),
             onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> ebooks()));
               //Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
             },
           ),
